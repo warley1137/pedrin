@@ -11,7 +11,8 @@ registroVeiculo = [
     ['r3', 'ERR3J79', 73.89, 100, 'comum'],
     ['r3', 'ERP1J22', 65.89, 100, 'comum'],
     ['r3', 'BNG9J99', 110.89, 100, 'especial'],
-    ['r3', 'ABT8I78', 110.98, 100, 'comum']
+    ['r3', 'ABT8I78', 110.98, 100, 'comum'],
+    ['r3', 'ABT8I78', 106.98, 100, 'comum']
 ]
 
 print("Tomou multa")
@@ -20,8 +21,14 @@ for elemento in registroVeiculo:
     # Calcula a porcentagem de excesso de velocidade
     pctExcesso = (float(elemento[2]) - float(elemento[3])) / float(elemento[3]) * 100
     
+    #teste para ver se o radar é menor que 100 ou não se for adiciona uma tolerncia de 7 se sim não adiciona limite
+    if elemento[2]<100:
+        pas = (float(elemento[3]) + 7)
+    else:
+        pas = elemento[3]
+        
     # Verifica se o veículo é especial e se a porcentagem de excesso é positiva
-    if not elemento[4] == "especial" and pctExcesso > 0:
+    if not elemento[4] == "especial" and pctExcesso > 0 and elemento[2] > pas:
         print(f"Placa: {elemento[1]} - Porcentagem: {pctExcesso:.2f}%  -  Numero do radar: {elemento[0]}")
   
         
